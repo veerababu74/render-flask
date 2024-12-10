@@ -76,7 +76,10 @@ def generate_jwt_token(user_id):
 def get_current_user():
     user_id = get_jwt_identity()
     return User.query.get(user_id)
-
+    
+@app.route("/hello", methods=["GET", "OPTIONS"])
+def helloworld():
+    return {"hello": "world"}
 
 # Routes
 @app.route("/register", methods=["POST"])
