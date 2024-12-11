@@ -127,65 +127,65 @@ def login_with_github():
     return github.authorize_redirect(redirect_uri)
 
 
-# @app.route("/authorize")
-# def authorize():
-#     try:
-#         token = github.authorize_access_token()
-#         user_info = github.get("user").json()
+@app.route("/authorize")
+def authorize():
+    try:
+        token = github.authorize_access_token()
+        user_info = github.get("user").json()
 
-#         # Check if the user exists in the database
-#         user = User.query.filter_by(github_id=user_info["id"]).first()
-#         if not user:
-#             user = User(username=user_info["login"], github_id=user_info["id"])
-#             db.session.add(user)
-#             db.session.commit()
+        # Check if the user exists in the database
+        user = User.query.filter_by(github_id=user_info["id"]).first()
+        if not user:
+            user = User(username=user_info["login"], github_id=user_info["id"])
+            db.session.add(user)
+            db.session.commit()
 
-#         # Generate a JWT token for the user
-#         access_token = generate_jwt_token(user.id)
+        # Generate a JWT token for the user
+        access_token = generate_jwt_token(user.id)
 
-#         # Redirect the user to the frontend with the token and username as query params
-#         frontend_url = "http://localhost:3004/github-redirect"  # Replace with your actual frontend URL
+        # Redirect the user to the frontend with the token and username as query params
+        frontend_url = "https://reactfronend.onrender.com/github-redirect"  # Replace with your actual frontend URL
 
-#         return redirect(f"{frontend_url}?token={access_token}&username={user.username}")
+        return redirect(f"{frontend_url}?token={access_token}&username={user.username}")
 
-#     except Exception as e:
-#         return jsonify({"error": f"Authorization failed: {e}"}), 500
+    except Exception as e:
+        return jsonify({"error": f"Authorization failed: {e}"}), 500
 
 
 from flask import current_app, make_response
 from datetime import datetime, timedelta
 
 
-@app.route("/authorize", methods=["GET", "OPTIONS"])
-def authorize():
-    token = github.authorize_access_token()  # This will fetch the token
-    user_info = github.get("user").json()  # Fetch user info from GitHub
+# @app.route("/authorize", methods=["GET", "OPTIONS"])
+# def authorize():
+#     token = github.authorize_access_token()  # This will fetch the token
+#     user_info = github.get("user").json()  # Fetch user info from GitHub
 
-    # Simulate user login or creation logic (store info in your database)
-    user = {
-        "github_id": user_info["id"],
-        "username": user_info["login"],
-        "email": user_info.get("email", "N/A"),
-    }
-    # Generate JWT or session token
-    # Example: Generate a JWT token
-    access_token = create_access_token(identity=user["github_id"])
+#     # Simulate user login or creation logic (store info in your database)
+#     user = {
+#         "github_id": user_info["id"],
+#         "username": user_info["login"],
+#         "email": user_info.get("email", "N/A"),
+#     }
+#     # Generate JWT or session token
+#     # Example: Generate a JWT token
+#     access_token = create_access_token(identity=user["github_id"])
 
-    # Set the token as a cookie or store in session
-    response = redirect(
-        "http://localhost:3004/login"
-    )  # Redirect to frontend /get_cookie
-    # response = redirect("/get_cookie")
-    # response.set_cookie("access_token", access_token)
-    response.set_cookie(
-        "access_token",
-        access_token,
-        httponly=True,  # Prevent JavaScript access
-        secure=False,  # Set to True when using HTTPS in production
-        samesite="None",  # Allow cookies to be sent cross-origin
-    )
+#     # Set the token as a cookie or store in session
+#     response = redirect(
+#         "http://localhost:3004/login"
+#     )  # Redirect to frontend /get_cookie
+#     # response = redirect("/get_cookie")
+#     # response.set_cookie("access_token", access_token)
+#     response.set_cookie(
+#         "access_token",
+#         access_token,
+#         httponly=True,  # Prevent JavaScript access
+#         secure=False,  # Set to True when using HTTPS in production
+#         samesite="None",  # Allow cookies to be sent cross-origin
+#     )
 
-    return response
+#     return response
 
 
 @app.route("/profile", methods=["GET"])
