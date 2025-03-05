@@ -31,7 +31,7 @@ from Properties.urls import FRONTEND_BASE_URL_FOR_CORS, FRONTEND_BASE_URL
 #     },
 # )
 
-CORS(app, origins=FRONTEND_BASE_URL_FOR_CORS)
+# CORS(app, origins=FRONTEND_BASE_URL_FOR_CORS)
 
 # Configure the app using the configuration function
 configure_app(app)
