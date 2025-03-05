@@ -28,7 +28,8 @@
 
 # # Request Password Reset
 # @email_pass_reste_bp.route("/request_password_reset", methods=["POST", "OPTIONS"])
-# @cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+# @cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
+
 # def request_password_reset():
 #     data = request.get_json()
 #     if not data or "email" not in data:
@@ -59,7 +60,8 @@
 
 # # Reset Password API
 # @email_pass_reste_bp.route("/reset_password/<token>", methods=["POST"])
-# @cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+# @cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
+
 # def reset_password(token):
 #     try:
 #         # Validate the token
@@ -132,7 +134,7 @@ def send_password_reset_email(email, reset_link):
 
 # Request Password Reset
 @email_pass_reset_bp.route("/request_password_reset", methods=["POST", "OPTIONS"])
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
 def request_password_reset():
     data = request.get_json()
     if not data or "email" not in data:
@@ -174,7 +176,7 @@ def request_password_reset():
 
 # Reset Password API
 @email_pass_reset_bp.route("/reset_password/<token>", methods=["POST"])
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
 def reset_password(token):
     try:
         # Validate the token

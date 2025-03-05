@@ -112,7 +112,7 @@ def generate_jwt_token(user_id):
 
 
 @github_bp.route("/login/github", methods=["GET", "OPTIONS"])
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
 def login_with_github():
     """Redirect user to GitHub for login"""
     redirect_uri = url_for("github_bp.authorize", _external=True)

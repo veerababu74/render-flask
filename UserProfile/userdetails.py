@@ -108,7 +108,7 @@ def create_email_verification_token(user_id, new_email, secret_key):
 # Update Profile Route
 @user_bp.route("/update_profile", methods=["PUT"])
 @jwt_required()
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
 def update_profile():
     """Endpoint to update user profile (password, firstname, lastname)."""
     data = request.get_json()
@@ -168,7 +168,7 @@ def update_profile():
 
 # User Details Route
 @user_bp.route("/user_details", methods=["GET"])
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
 @jwt_required()
 def user_details():
     current_user_id = get_jwt_identity()

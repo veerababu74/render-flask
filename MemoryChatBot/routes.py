@@ -42,7 +42,7 @@ def history_to_messages(conversation_id):
 
 @memory_chatbot_blueprint.route("/api/get_response", methods=["POST"])
 @jwt_required()
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
 def get_response():
     user_id = get_jwt_identity()
     data = request.get_json()
@@ -93,7 +93,7 @@ def get_response():
 
 
 @memory_chatbot_blueprint.route("/api/conversations", methods=["GET"])
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
 @jwt_required()
 def get_conversations():
     user_id = get_jwt_identity()
@@ -104,7 +104,7 @@ def get_conversations():
 @memory_chatbot_blueprint.route(
     "/api/conversation/<int:conversation_id>", methods=["GET"]
 )
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
 @jwt_required()
 def view_conversation(conversation_id):
     user_id = get_jwt_identity()
@@ -129,7 +129,7 @@ def view_conversation(conversation_id):
 
 
 @memory_chatbot_blueprint.route("/api/create_conversation", methods=["POST"])
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
 @jwt_required()
 def create_conversation():
     user_id = get_jwt_identity()
@@ -142,7 +142,7 @@ def create_conversation():
 @memory_chatbot_blueprint.route(
     "/api/delete_conversation/<int:conversation_id>", methods=["DELETE"]
 )
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
 @jwt_required()
 def delete_conversation(conversation_id):
     user_id = get_jwt_identity()
@@ -159,7 +159,7 @@ def delete_conversation(conversation_id):
 
 
 @memory_chatbot_blueprint.route("/api/update_title", methods=["POST"])
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS)
+@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
 @jwt_required()
 def update_title():
     user_id = get_jwt_identity()

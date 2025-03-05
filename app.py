@@ -24,12 +24,12 @@ app = Flask(__name__)
 
 from Properties.urls import FRONTEND_BASE_URL_FOR_CORS, FRONTEND_BASE_URL
 
-# CORS(
-#     app,
-#     resources={
-#         r"/*": {"origins": FRONTEND_BASE_URL_FOR_CORS, "supports_credentials": True}
-#     },
-# )
+CORS(
+    app,
+    resources={
+        r"/*": {"origins": FRONTEND_BASE_URL_FOR_CORS, "supports_credentials": True}
+    },
+)
 
 # CORS(app, origins=FRONTEND_BASE_URL_FOR_CORS)
 
@@ -63,6 +63,15 @@ def hello():
             "environment": app.config["ENV"],
         }
     )
+
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = FRONTEND_BASE_URL_FOR_CORS
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+    response.headers["Access-Control-Allow-Credentials"] = "true"
+    return response
 
 
 # Ensure the SQLite database file and structure exist in development
