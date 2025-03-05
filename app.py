@@ -24,12 +24,12 @@ app = Flask(__name__)
 
 from Properties.urls import FRONTEND_BASE_URL_FOR_CORS, FRONTEND_BASE_URL
 
-CORS(
-    app,
-    resources={
-        r"/*": {"origins": FRONTEND_BASE_URL_FOR_CORS, "supports_credentials": True}
-    },
-)
+# CORS(
+#     app,
+#     resources={
+#         r"/*": {"origins": FRONTEND_BASE_URL_FOR_CORS, "supports_credentials": True}
+#     },
+# )
 
 # CORS(app, origins=FRONTEND_BASE_URL_FOR_CORS)
 
