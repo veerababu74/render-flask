@@ -39,7 +39,9 @@ def send_verification_email(email, verification_link):
 
 # Registration Route
 @email_bp.route("/register", methods=["POST"])
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
+# ##@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
+
+
 # Allow CORS for your frontend
 def register_email():
     """Endpoint to register a new user."""
@@ -151,7 +153,9 @@ def verify_email(token):
 
 
 @email_bp.route("/resend_verification_email", methods=["POST"])
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
+###@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
+
+
 @jwt_required()  # Protect the route with JWT authentication
 def resend_verification_email():
     current_user_id = get_jwt_identity()  # Get the current user's ID from the JWT
@@ -176,7 +180,9 @@ def resend_verification_email():
 
 
 @email_bp.route("/login", methods=["POST"])
-@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
+###@cross_origin(origins=FRONTEND_BASE_URL_FOR_CORS, supports_credentials=True)
+
+
 def login_email():
     """Endpoint for user login."""
     data = request.get_json()
