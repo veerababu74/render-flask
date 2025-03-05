@@ -1,8 +1,14 @@
 import os
 
-DEV_ENVIRONMENT = "LOCAL"
+DEV_ENVIRONMENT = "production"
 
-FRONTEND_BASE_URL_FOR_CORS = "http://localhost:3000"
+FRONTEND_BASE_URL_FOR_CORS = (
+    "https://reactfronend.onrender.com/"
+    if DEV_ENVIRONMENT == "production"
+    else "http://localhost:3000"
+)
+
+
 FRONTEND_BASE_URL_LOCAL = "http://localhost:3000"
 FRONTEND_BASE_URL_PRODUCTION = "https://reactfronend.onrender.com/"
 

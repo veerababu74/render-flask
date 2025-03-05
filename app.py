@@ -21,10 +21,13 @@ from MemoryChatBot.routes import memory_chatbot_blueprint
 app = Flask(__name__)
 
 # Enable CORS for frontend interactions
+
+from Properties.urls import FRONTEND_BASE_URL_FOR_CORS, FRONTEND_BASE_URL
+
 CORS(
     app,
     resources={
-        r"/*": {"origins": "http://localhost:3000", "supports_credentials": True}
+        r"/*": {"origins": FRONTEND_BASE_URL_FOR_CORS, "supports_credentials": True}
     },
 )
 
