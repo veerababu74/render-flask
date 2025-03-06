@@ -32,7 +32,7 @@ from Properties.urls import FRONTEND_BASE_URL_FOR_CORS, FRONTEND_BASE_URL
 # )
 
 configure_app(app)
-CORS(app, resources={r"/*": {"origins": app.config["CORS_ALLOWED_ORIGINS"]}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 # CORS(app)
 # Configure the app using the configuration function
 
